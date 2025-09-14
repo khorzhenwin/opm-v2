@@ -69,7 +69,7 @@ const errorCodes = [
 
 export default function TSVPayloadConverter() {
   const [tsvInput, setTsvInput] = useState("")
-  const [status, setStatus] = useState<"SUCCESS" | "ERROR">("SUCCESS")
+  const [status, setStatus] = useState<"SETTLED" | "ERROR">("SETTLED")
   const [selectedError, setSelectedError] = useState("")
   const [generatedPayload, setGeneratedPayload] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
@@ -119,7 +119,7 @@ export default function TSVPayloadConverter() {
             const transfer: any = {
               id: transferId,
               stepId: stepId,
-              status: status === "SUCCESS" ? "SETTLED" : "ERROR",
+              status: status === "SETTLED" ? "SETTLED" : "ERROR",
             }
 
             // Add error details if ERROR status is selected
@@ -235,10 +235,10 @@ export default function TSVPayloadConverter() {
 
               <div className="space-y-3">
                 <Label>Transfer Status</Label>
-                <RadioGroup value={status} onValueChange={(value: "SUCCESS" | "ERROR") => setStatus(value)}>
+                <RadioGroup value={status} onValueChange={(value: "SETTLED" | "ERROR") => setStatus(value)}>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="SUCCESS" id="success" />
-                    <Label htmlFor="success">SUCCESS</Label>
+                    <RadioGroupItem value="SETTLED" id="settled" />
+                    <Label htmlFor="settled">SETTLED</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="ERROR" id="error" />
